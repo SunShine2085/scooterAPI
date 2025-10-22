@@ -9,6 +9,13 @@ app=Flask(__name__)
 @app.route('/')
 def home():
 	return redirect(url_for('view_all_available'))
+
+#view all scooters
+@app.route('/inventory')
+def inventory():
+    db = init_db()
+    db_dictlist = convert_db_to_dictlist(db)
+    return json.dumps(db_dictlist), HTTPStatus.OK.value, {'Content-Type':'application/json'}
 	
 @app.route('/view_all_available')
 def view_all_available():
