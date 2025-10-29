@@ -8,7 +8,7 @@
             background-color: purple; /* page color */
             /* Use 1967 Vespa photo if present; fall back to SVG */
             background-image: url('{{ url_for('static', filename='img/vespa1967.jpg') }}'), url('{{ url_for('static', filename='img/scooter.svg') }}');
-            background-size: cover;
+            background-size: 600px auto; /* adjust as desired */
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
