@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" aria-labelledby="title desc" role="img">
+  <title id="title">Motorized Scooter Illustration</title>
+  <desc id="desc">A stylized Vespa-like motor scooter with seat, body, headlight and two large wheels.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7f7f7"/>
+      <stop offset="100%" stop-color="#e9e9e9"/>
+    </linearGradient>
+    <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7b5cd6"/>
+      <stop offset="100%" stop-color="#5a3fc0"/>
+    </linearGradient>
+    <filter id="softShadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6" result="blur"/>
+      <feOffset in="blur" dx="0" dy="4" result="offset"/>
+      <feMerge>
+        <feMergeNode in="offset"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="960" height="640" fill="url(#bg)"/>
+
+  <!-- ground hint -->
+  <ellipse cx="480" cy="460" rx="360" ry="28" fill="#d6d6d6" opacity="0.5"/>
+
+  <!-- Motorized scooter group -->
+  <g filter="url(#softShadow)" transform="translate(140,160)">
+    <!-- rear wheel -->
+    <circle cx="210" cy="300" r="70" fill="#2d2d2d"/>
+    <circle cx="210" cy="300" r="36" fill="#aaaaaa"/>
+    <!-- front wheel -->
+    <circle cx="560" cy="300" r="70" fill="#2d2d2d"/>
+    <circle cx="560" cy="300" r="36" fill="#aaaaaa"/>
+
+    <!-- floorboard / lower body -->
+    <path d="M180,280 C240,280 340,280 420,280 C455,280 500,300 540,300 L540,320 C500,320 460,308 420,308 C320,308 240,308 180,308 Z"
+          fill="#333"/>
+
+    <!-- main body with leg shield and engine cowl -->
+    <path d="M260,180 C260,150 300,130 360,130 L430,130 C460,130 485,125 505,145 C520,160 520,190 510,210 C495,235 470,250 440,255 L395,260 C350,265 320,285 300,310 C285,330 270,340 250,340 L240,340 C225,340 215,330 218,315 C222,297 232,275 250,255 C260,240 260,210 260,180 Z"
+          fill="url(#bodyGrad)"/>
+
+    <!-- engine/battery box hint -->
+    <rect x="300" y="255" width="72" height="36" rx="8" fill="#4b39a8"/>
+    <circle cx="315" cy="273" r="6" fill="#e9e9ff"/>
+    <circle cx="340" cy="273" r="6" fill="#e9e9ff"/>
+
+    <!-- seat -->
+    <path d="M360,120 C400,100 470,105 510,125 C518,129 520,142 512,148 C496,161 463,170 420,170 C380,170 350,160 340,148 C334,140 345,126 360,120 Z"
+          fill="#1f1f1f"/>
+
+    <!-- handlebar and headlight stem -->
+    <rect x="515" y="100" width="14" height="66" rx="7" fill="#4a4a4a"/>
+    <rect x="486" y="96" width="60" height="10" rx="5" fill="#4a4a4a"/>
+
+    <!-- headlight -->
+    <circle cx="522" cy="96" r="18" fill="#ffd86b" stroke="#b9a14a" stroke-width="3"/>
+
+    <!-- front fender -->
+    <path d="M510,300 C520,270 550,255 580,255 C590,255 600,262 603,272 C606,282 605,295 600,300 C590,310 560,310 540,310 C525,310 510,308 510,300 Z"
+          fill="url(#bodyGrad)"/>
+
+    <!-- rear fender / tail -->
+    <path d="M150,300 C160,260 190,240 240,235 L250,235 C255,270 235,310 210,320 C185,330 160,325 150,300 Z"
+          fill="url(#bodyGrad)"/>
+
+    <!-- exhaust hint -->
+    <rect x="230" y="315" width="70" height="14" rx="7" fill="#5b5b5b"/>
+    <circle cx="306" cy="322" r="3" fill="#9c9c9c"/>
+
+    <!-- mirror stems -->
+    <rect x="500" y="86" width="4" height="24" rx="2" fill="#6a6a6a"/>
+    <rect x="538" y="86" width="4" height="24" rx="2" fill="#6a6a6a"/>
+    <!-- mirrors -->
+    <circle cx="502" cy="82" r="8" fill="#cfcfcf" stroke="#9b9b9b" stroke-width="2"/>
+    <circle cx="540" cy="82" r="8" fill="#cfcfcf" stroke="#9b9b9b" stroke-width="2"/>
+  </g>
+</svg>

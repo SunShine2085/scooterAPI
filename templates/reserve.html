@@ -4,7 +4,16 @@
     <meta charset="UTF-8" />
     <title>Start Reservation - Scooter App</title>
     <style>
-        body { background-color: purple; font-family: Arial, sans-serif; color: white; }
+        body {
+            background-color: purple; /* page color */
+            background-image: url('{{ url_for('static', filename='img/vespa1967.jpg') }}'), url('{{ url_for('static', filename='img/scooter.svg') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
         .container { max-width: 720px; margin: 20px auto; }
         h1 { text-align: center; }
         a.btn, button.btn { display: inline-block; margin: 10px 0; padding: 8px 14px; background:#fff; color: purple; text-decoration:none; border-radius:6px; border: none; cursor: pointer; }
@@ -64,4 +73,3 @@
     </div>
 </body>
 </html>
-
