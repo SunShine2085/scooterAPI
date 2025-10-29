@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Inventory - Scooter App</title>
+    <style>
+        body { background-color: purple; font-family: Arial, sans-serif; color: white; }
+        .container { max-width: 960px; margin: 20px auto; }
+        h1 { text-align: center; }
+        a.btn { display: inline-block; margin: 10px 0; padding: 8px 14px; background:#fff; color: purple; text-decoration:none; border-radius:6px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #fff; color: #333; }
+        th, td { padding: 8px 10px; border: 1px solid #ddd; text-align: left; }
+        th { background: #f2f2f2; }
+    </style>
+    <script>
+        async function loadInventory() {
+            const tbody = document.getElementById('tbl-body');
+            tbody.innerHTML = '<tr><td colspan="4">Loading...</td></tr>';
+            try {
+                const resp = await fetch('/inventory');
+                const data = await resp.json();
+                if (!Array.isArray(data)) {
+                    tbody.innerHTML = `<tr><td colspan="4">Unexpected response</td></tr>`;
+                    return;
+                }
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4">No scooters found.</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = data.map(it => `
+                    <tr>
+                        <td>${it.id}</td>
+                        <td>${it.lat}</td>
+                        <td>${it.lng}</td>
+                        <td>${it.is_reserved ? 'Yes' : 'No'}</td>
+                    </tr>
+                `).join('');
+            } catch (e) {
+                tbody.innerHTML = `<tr><td colspan="4">Error: ${e}</td></tr>`;
+            }
+        }
+        document.addEventListener('DOMContentLoaded', loadInventory);
+    </script>
+    </head>
+<body>
+    <div class="container">
+        <h1>All Scooters (Inventory)</h1>
+        <a href="/" class="btn">← Back Home</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Reserved</th>
+                </tr>
+            </thead>
+            <tbody id="tbl-body"></tbody>
+        </table>
+    </div>
+</body>
+</html>
+

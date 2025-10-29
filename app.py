@@ -608,6 +608,27 @@ def home():
     breadcrumb("home -> render index.html")
     return render_template('index.html')
 
+# HTML views that render tables for each endpoint (client-side fetch)
+@app.route('/inventory_view')
+def inventory_view():
+    return render_template('inventory.html')
+
+@app.route('/available_view')
+def available_view():
+    return render_template('available.html')
+
+@app.route('/search_view')
+def search_view():
+    return render_template('search.html')
+
+@app.route('/reserve_view')
+def reserve_view():
+    return render_template('reserve.html')
+
+@app.route('/end_view')
+def end_view():
+    return render_template('end.html')
+
 # view all scooters
 @app.route('/inventory')
 def inventory():

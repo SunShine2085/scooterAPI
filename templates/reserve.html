@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Start Reservation - Scooter App</title>
+    <style>
+        body { background-color: purple; font-family: Arial, sans-serif; color: white; }
+        .container { max-width: 720px; margin: 20px auto; }
+        h1 { text-align: center; }
+        a.btn, button.btn { display: inline-block; margin: 10px 0; padding: 8px 14px; background:#fff; color: purple; text-decoration:none; border-radius:6px; border: none; cursor: pointer; }
+        form { background: rgba(255,255,255,0.15); padding: 12px; border-radius: 8px; }
+        label { display: inline-block; width: 90px; }
+        input { padding: 6px; margin: 6px 8px 6px 0; border-radius: 4px; border: 1px solid #ccc; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #fff; color: #333; }
+        th, td { padding: 8px 10px; border: 1px solid #ddd; text-align: left; }
+        th { background: #f2f2f2; }
+        #status { margin-top: 10px; }
+    </style>
+    <script>
+        async function startReservation(evt) {
+            evt.preventDefault();
+            const id = document.getElementById('scooter_id').value.trim();
+            const tbody = document.getElementById('tbl-body');
+            const status = document.getElementById('status');
+            status.textContent = '';
+            tbody.innerHTML = '<tr><td>Loading...</td></tr>';
+            try {
+                const resp = await fetch(`/reservation/start?id=${encodeURIComponent(id)}`);
+                const data = await resp.json();
+                if (!resp.ok) {
+                    status.textContent = (data && data.msg) ? data.msg : 'Reservation failed.';
+                    tbody.innerHTML = '';
+                    return;
+                }
+                const msg = (data && data.msg) ? data.msg : 'Reserved.';
+                tbody.innerHTML = `<tr><td>${msg}</td></tr>`;
+            } catch (e) {
+                status.textContent = `Error: ${e}`;
+                tbody.innerHTML = '';
+            }
+        }
+    </script>
+    </head>
+<body>
+    <div class="container">
+        <h1>Start Reservation</h1>
+        <a href="/" class="btn">← Back Home</a>
+
+        <form onsubmit="startReservation(event)">
+            <label for="scooter_id">Scooter ID</label>
+            <input id="scooter_id" type="text" required />
+            <button class="btn" type="submit">Reserve</button>
+        </form>
+
+        <div id="status"></div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody id="tbl-body"></tbody>
+        </table>
+    </div>
+</body>
+</html>
+

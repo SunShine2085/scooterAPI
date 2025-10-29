@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Search Scooters - Scooter App</title>
+    <style>
+        body { background-color: purple; font-family: Arial, sans-serif; color: white; }
+        .container { max-width: 960px; margin: 20px auto; }
+        h1 { text-align: center; }
+        a.btn, button.btn { display: inline-block; margin: 10px 0; padding: 8px 14px; background:#fff; color: purple; text-decoration:none; border-radius:6px; border: none; cursor: pointer; }
+        form { background: rgba(255,255,255,0.15); padding: 12px; border-radius: 8px; }
+        label { display: inline-block; width: 90px; }
+        input { padding: 6px; margin: 6px 8px 6px 0; border-radius: 4px; border: 1px solid #ccc; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #fff; color: #333; }
+        th, td { padding: 8px 10px; border: 1px solid #ddd; text-align: left; }
+        th { background: #f2f2f2; }
+        #status { margin-top: 10px; }
+    </style>
+    <script>
+        async function doSearch(evt) {
+            evt.preventDefault();
+            const lat = parseFloat(document.getElementById('lat').value);
+            const lng = parseFloat(document.getElementById('lng').value);
+            const radius = parseFloat(document.getElementById('radius').value);
+            const tbody = document.getElementById('tbl-body');
+            const status = document.getElementById('status');
+            status.textContent = '';
+            tbody.innerHTML = '<tr><td colspan="3">Searching...</td></tr>';
+            try {
+                const qs = new URLSearchParams({ lat, lng, radius });
+                const resp = await fetch(`/search?${qs.toString()}`);
+                const data = await resp.json();
+                if (!resp.ok) {
+                    tbody.innerHTML = '';
+                    status.textContent = (data && data.msg) ? data.msg : 'Search failed.';
+                    return;
+                }
+                if (!Array.isArray(data) || data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="3">No results.</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = data.map(it => `
+                    <tr>
+                        <td>${it.id}</td>
+                        <td>${it.lat}</td>
+                        <td>${it.lng}</td>
+                    </tr>
+                `).join('');
+            } catch (e) {
+                tbody.innerHTML = '';
+                status.textContent = `Error: ${e}`;
+            }
+        }
+    </script>
+    </head>
+<body>
+    <div class="container">
+        <h1>Search Available Scooters</h1>
+        <a href="/" class="btn">← Back Home</a>
+
+        <form onsubmit="doSearch(event)">
+            <label for="lat">Latitude</label>
+            <input id="lat" type="number" step="any" value="37.7749" required />
+            <label for="lng">Longitude</label>
+            <input id="lng" type="number" step="any" value="-122.4194" required />
+            <label for="radius">Radius (m)</label>
+            <input id="radius" type="number" step="any" value="500" required />
+            <button class="btn" type="submit">Search</button>
+        </form>
+
+        <div id="status"></div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                </tr>
+            </thead>
+            <tbody id="tbl-body"></tbody>
+        </table>
+    </div>
+</body>
+</html>
+
