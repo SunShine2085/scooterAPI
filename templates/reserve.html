@@ -48,6 +48,11 @@
                 tbody.innerHTML = '';
             }
         }
+        // Fix any stray encoding in the Back Home link text
+        document.addEventListener('DOMContentLoaded', () => {
+            const back = document.querySelector('.container a.btn');
+            if (back) back.textContent = '\u2190 Back Home';
+        });
     </script>
     </head>
 <body>
