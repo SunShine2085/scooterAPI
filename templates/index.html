@@ -6,8 +6,8 @@
     <style>
         body {
             background-color: purple; /* page color */
-            /* Use 1967 Vespa photo if present; fall back to SVG */
-            background-image: url('{{ url_for('static', filename='img/vespa1967.jpg') }}'), url('{{ url_for('static', filename='img/scooter.svg') }}');
+            /* Use external 1967 Vespa photo; fall back to local SVG */
+            background-image: url('https://images.squarespace-cdn.com/content/v1/5a3c5d20e45a7c6a24667b0c/1679386229114-P1NGG5RW8Q5864CK10PO/BM379%2B-%2BPIA423%2B%E2%80%93%2B1967%2BVESPA%2B180SS%2B-%2BBLUE%2B-%2B1600px.jpg?format=1000w'), url('{{ url_for('static', filename='img/scooter.svg') }}');
             background-size: 600px auto; /* adjust as desired */
             background-position: center;
             background-repeat: no-repeat;
